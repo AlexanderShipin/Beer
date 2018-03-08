@@ -23,7 +23,7 @@ namespace Beer.Controllers
 		{
 			var model = _repository.Get();
 
-			return View(model);
+			return View("Index", model);
 		}
 
 		protected override void OnException(ExceptionContext filterContext)

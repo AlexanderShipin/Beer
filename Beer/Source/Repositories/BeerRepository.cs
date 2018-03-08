@@ -1,6 +1,7 @@
-﻿using Beer.Models;
-using Brewery.Source.DataProviders;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+
+using Beer.Models;
+
 namespace Beer.Source.Repositories
 {
 	public class BeerRepository : IRepository<BeerGridModel>

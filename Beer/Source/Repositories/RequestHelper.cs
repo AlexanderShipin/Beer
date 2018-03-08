@@ -1,9 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Web.Configuration;
+﻿using System.Web.Configuration;
 
-namespace Brewery.Source.DataProviders
+namespace Beer.Source.Repositories
 {
 	public class RequestHelper
 	{
