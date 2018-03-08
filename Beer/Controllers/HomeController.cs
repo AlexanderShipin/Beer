@@ -25,5 +25,14 @@ namespace Beer.Controllers
 
 			return View(model);
 		}
+
+		protected override void OnException(ExceptionContext filterContext)
+		{
+			filterContext.ExceptionHandled = true;
+
+			//_Logger.Error(filterContext.Exception);
+
+			filterContext.Result = RedirectToAction("Index", "Error");
+		}
 	}
 }

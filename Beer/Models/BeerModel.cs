@@ -10,9 +10,8 @@ namespace Beer.Models
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }
-		public string NameDisplay { get; set; }
 		public decimal? Abv { get; set; }
-		public int? Ibu { get; set; }
+		public decimal? Ibu { get; set; }
 
 		[JsonConverter(typeof(BeerModelJsonConverter))]
 		public string Glass { get; set; }//glass.name
