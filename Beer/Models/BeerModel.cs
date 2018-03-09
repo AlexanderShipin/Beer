@@ -6,7 +6,7 @@ using Beer.Source.Repositories;
 
 namespace Beer.Models
 {
-	public class BeerModel
+	public class BeerInGridModel
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }

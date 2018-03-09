@@ -1,14 +1,15 @@
 ﻿$(document).ready(function () {
 
     //search
-    $(document).on("click", "#search", function (elem) {
+    $(document).on("click", "#search", function () {
         getBeers(getFilterParams());
     });
 
     //reset
-    $(document).on("click", "#reset", function (elem) {
-        const name = $("#name").val('');
-        const organic = $("#organic").prop("checked", false);
+    $(document).on("click", "#reset", function () {
+        $("#name").val('');
+        $("#organic-no").prop("checked", false);
+        $("#organic-yes").prop("checked", false);
         getBeers('');
     });
 
@@ -19,7 +20,7 @@
     });
 
     //previous page
-    $(document).on("click", ".prev", function (elem) {
+    $(document).on("click", ".prev", function () {
         let currentPage = getCurrentPage();
         if (currentPage == 1)
             return;
@@ -28,7 +29,7 @@
     });
 
     //next page
-    $(document).on("click", ".next", function (elem) {
+    $(document).on("click", ".next", function () {
         let currentPage = getCurrentPage();
         const totalPages = $("#total-pages").val();
         if (currentPage == totalPages)
@@ -37,33 +38,73 @@
         getBeers(getFilterParams() + "&" + getSortParams() + "&" + `page=${++currentPage}`);
     });
 
+    //beer details
+    $(document).on("click", ".beer-details", function (elem) {
+        const id = $(elem.target).attr("data-id");
+        getBeer(id);
+    });
+
+    //close beer details
+    $(document).on("click", ".modal-content-close-button", function () {
+        $("#modal-window").hide();
+    });
+
+    //organic yes
+    $(document).on("click", "#organic-yes", function () {
+        $("#organic-no").prop("checked", !this.checked);
+    });
+
+    //organic no
+    $(document).on("click", "#organic-no", function () {
+        $("#organic-yes").prop("checked", !this.checked);
+    });
+
     getBeers('');
 });
+
+function getBeer(id) {
+    const beerBaseUrl = "Home/Beer";
+    const beerUrl = `${beerBaseUrl}?id=${id}`;
+
+    $.getJSON(beerUrl).done(showBeerDetails);
+}
+
+function showBeerDetails(beer) {
+    $(".modal-content-name").text(beer.Name);
+    $(".modal-content-abv").text(beer.Abv);
+    $(".modal-content-ibu").text(beer.Ibu);
+    $(".modal-content-dsc").text(beer.Description);
+    $("#modal-window").show();
+}
 
 function getBeers(params) {
     const beersBaseUrl = "Home/Beers";
     const beersUrl = `${beersBaseUrl}?${params}`;
 
     $("#grid-body").empty();
-    $.getJSON(beersUrl).done(function (beerGrid) {
-        $.each(beerGrid.Data, function (index, value) {
-            $(formatBeerRow(value)).appendTo($("#grid-body"));
-        });
+    $.getJSON(beersUrl).done(feelBeersGrid);
+}
 
-        $("#current-page").val(beerGrid.CurrentPage);
-        $(".current-page").text(beerGrid.CurrentPage);
-        $("#total-pages").val(beerGrid.NumberOfPages);
-        $(".total-pages").text(beerGrid.NumberOfPages);
+function feelBeersGrid(beerGrid) {
+    $.each(beerGrid.Data, function (index, value) {
+        $(formatBeerRow(value)).appendTo($("#grid-body"));
     });
+
+    $("#current-page").val(beerGrid.CurrentPage);
+    $(".current-page").text(beerGrid.CurrentPage);
+    $("#total-pages").val(beerGrid.NumberOfPages);
+    $(".total-pages").text(beerGrid.NumberOfPages);
 }
 
 function getFilterParams() {
     const name = $("#name").val();
-    const organic = $("#organic").prop("checked");
+    const organicYes = $("#organic-yes").prop("checked");
+    const organicNo = $("#organic-no").prop("checked");
 
     let result = '';
     result += name ? `name=${name}` : '';
-    result += organic ? `&isOrganic=${organic}` : '';
+    result += organicYes ? `&isOrganic=${organicYes}` : '';
+    result += organicNo ? `&isOrganic=${!organicNo}` : '';
 
     return result;
 }
@@ -75,6 +116,7 @@ function getSortParams() {
 function sortBy(elem) {
     const columnName = $(elem.target).attr("data-name");
     let columnSortOrder = $(elem.target).attr("data-sort");
+
     if (columnSortOrder)
         columnSortOrder = columnSortOrder === "asc" ? "desc" : "asc";
     else
@@ -94,8 +136,7 @@ function formatBeerRow(item) {
             item[key] = '';
     });
     return '<tr>' +
-                '<td>' + item.Id + '</td>' +
-                '<td>' + item.Name + '</td>' +
+                '<td class="beer-details" data-id="' + item.Id + '">' + item.Name + '</td>' +
                 '<td>' + item.Abv + '</td>' +
                 '<td>' + item.Ibu + '</td>' +
                 '<td>' + item.Glass + '</td>' +

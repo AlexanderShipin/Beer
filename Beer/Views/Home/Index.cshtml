@@ -15,7 +15,7 @@
             <div>Name: <input id="name" type="text" /></div>
         </div>
         <div class="search-panel-column">
-            <div>Organic: <input id="organic" type="checkbox" /></div>
+            <div>Organic: Yes <input id="organic-yes" type="checkbox" />  No <input id="organic-no" type="checkbox" /></div>
         </div>
         <div class="buttons">
             <div id="reset">Reset</div>
@@ -28,15 +28,14 @@
     <table>
         <thead id="grid-header">
             <tr>
-                <th data-name="id" data-sort="">Id</th>
                 <th data-name="name" data-sort="" class="sortable">Name</th>
                 <th data-name="abv" data-sort="" class="sortable">Abv</th>
                 <th data-name="ibu" data-sort="" class="sortable">Ibu</th>
-                <th data-name="glass">Glass</th>
-                <th data-name="available">Available</th>
-                <th data-name="isOrganic">Organic</th>
-                <th data-name="statusDisplay">Status</th>
-                <th data-name="createDate">Create Date</th>
+                <th>Glass</th>
+                <th>Available</th>
+                <th>Organic</th>
+                <th>Status</th>
+                <th>Create Date</th>
             </tr>
         </thead>
         <tbody id="grid-body"></tbody>
@@ -48,5 +47,23 @@
         <span class="current-page"></span>
         <span class="next">&gt;</span>
         <span class="total-pages"></span> pages
+    </div>
+</div>
+<div id="modal-window">
+    <div id="modal-content">
+        <div class="modal-content-header">
+            <div class="modal-content-name"></div>
+            <div class="modal-content-close-button">X</div>
+        </div>
+        <div class="line">
+            <div class="label">Abv:</div>
+            <div class="modal-content-abv"></div>
+        </div>
+        <div class="line">
+            <div class="label">Ibu:</div>
+            <div class="modal-content-ibu"></div>
+        </div>
+        <div class="line label">Description:</div>
+        <div class="line modal-content-dsc"></div>
     </div>
 </div>

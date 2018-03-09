@@ -109,12 +109,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BeerDetailsModel.cs" />
     <Compile Include="Models\BeerGridModel.cs" />
     <Compile Include="Models\BeerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Repositories\BeerModelJsonConverter.cs" />
     <Compile Include="Source\Repositories\BeerRepository.cs" />
-    <Compile Include="Source\Repositories\IRepository.cs" />
+    <Compile Include="Source\Repositories\IBeerRepository.cs" />
+    <Compile Include="Source\Repositories\JsonHelper.cs" />
     <Compile Include="Source\Repositories\RequestHelper.cs" />
   </ItemGroup>
   <ItemGroup>

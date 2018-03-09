@@ -1,24 +1,32 @@
-﻿using Newtonsoft.Json;
-
-using Beer.Models;
+﻿using Beer.Models;
 
 namespace Beer.Source.Repositories
 {
-	public class BeerRepository : IRepository<BeerGridModel>
+	public class BeerRepository : IBeerRepository
 	{
-		private RequestHelper _requestHelper = new RequestHelper();
-
 		public BeerGridModel Get(string name, bool? isOrganic, int? page, string order, string sort)
 		{
 			var requestParams = getParameterString(name, isOrganic, page, order, sort);
-			var json = _requestHelper.Request(requestParams);
+			var json = RequestHelper.BeersRequest(requestParams);
 
 			if (string.IsNullOrEmpty(json))
 				return null;
 
-			var beerGridModel = JsonConvert.DeserializeObject<BeerGridModel>(json);
+			var beerGridModel = JsonHelper.JsonToBeerGridModel(json);
 
 			return beerGridModel;
+		}
+
+		public BeerDetailsModel Get(string id)
+		{
+			var json = RequestHelper.BeerRequest(id);
+
+			if (string.IsNullOrEmpty(json))
+				return null;
+
+			var beerDetailsModel = JsonHelper.JsonToBeerDetailsModel(json);
+
+			return beerDetailsModel;
 		}
 
 		private string getParameterString(string name, bool? isOrganic, int? page, string order, string sort)

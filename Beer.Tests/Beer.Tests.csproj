@@ -60,7 +60,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BeerModelConverterTests.cs" />
+    <Compile Include="JsonHelperTests.cs" />
     <Compile Include="BeerStubRepository.cs" />
     <Compile Include="HomeControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

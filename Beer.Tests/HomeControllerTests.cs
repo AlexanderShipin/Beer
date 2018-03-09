@@ -23,14 +23,15 @@ namespace Brewery.Tests
 		}
 
 		[TestMethod]
-		public void Index_Get_RetrievesDataFromRepository()
+		public void Index_Beers_RetrievesDataFromRepository()
 		{
 			var controller = new HomeController(new BeerStubRepository());
 
-			var result = controller.Index();
+			var result = controller.Beers("Beer1", true, 1, "name", "asc");
 
-			var model = (BeerGridModel)result.ViewData.Model;
+			var model = result.Data as BeerGridModel;
 
+			Assert.IsNotNull(model);
 			Assert.AreEqual(model.CurrentPage, 1);
 			Assert.AreEqual(model.NumberOfPages, 2);
 			Assert.AreEqual(model.TotalResults, 2);
@@ -44,6 +45,23 @@ namespace Brewery.Tests
 			Assert.AreEqual(model.Data[0].Abv, 2.1m);
 			Assert.AreEqual(model.Data[0].IsOrganic, "Y");
 			Assert.AreEqual(model.Data[0].StatusDisplay, "Verified");
+		}
+
+		[TestMethod]
+		public void Index_Beer_RetrievesDataFromRepository()
+		{
+			var controller = new HomeController(new BeerStubRepository());
+
+			var result = controller.Beer("abc");
+
+			var model = result.Data as BeerDetailsModel;
+
+			Assert.IsNotNull(model);
+			Assert.AreEqual(model.Id, "abc");
+			Assert.AreEqual(model.Name, "Beer1");
+			Assert.AreEqual(model.Ibu, 2.2m);
+			Assert.AreEqual(model.Abv, 2.1m);
+			Assert.AreEqual(model.Description, "Description1");
 		}
 	}
 }
