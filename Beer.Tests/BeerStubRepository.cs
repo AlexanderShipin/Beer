@@ -8,12 +8,7 @@ namespace Beer.Tests
 {
 	class BeerStubRepository : IRepository<BeerGridModel>
 	{
-		public BeerGridModel Filter(string exression)
-		{
-			throw new NotImplementedException();
-		}
-
-		public BeerGridModel Get()
+		public BeerGridModel Get(string name, bool? isOrganic, int? page, string order, string sort)
 		{
 			var beerGridModel = new BeerGridModel() {
 				CurrentPage = 1,
@@ -37,11 +32,6 @@ namespace Beer.Tests
 			beerGridModel.Data = new List<BeerModel> { beerModel };
 
 			return beerGridModel;
-		}
-
-		public BeerGridModel Sort(string field, string order)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

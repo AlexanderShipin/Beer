@@ -23,7 +23,7 @@ namespace Brewery.Tests
 		}
 
 		[TestMethod]
-		public void Index_Get_RetrievesAllContactsFromRepository()
+		public void Index_Get_RetrievesDataFromRepository()
 		{
 			var controller = new HomeController(new BeerStubRepository());
 

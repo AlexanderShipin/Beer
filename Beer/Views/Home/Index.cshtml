@@ -2,7 +2,51 @@
 @{
     ViewBag.Title = "Index";
 }
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/index.js")"></script>
+}
 
-<h2>Index</h2>
-<div>@Model.CurrentPage</div>
+<div class="title">Beers</div>
 
+<div id="search-panel">
+    <div class="search-panel-line">
+        <div class="search-panel-column">
+            <div>Name: <input id="name" type="text" /></div>
+        </div>
+        <div class="search-panel-column">
+            <div>Organic: <input id="organic" type="checkbox" /></div>
+        </div>
+        <div class="buttons">
+            <div id="reset">Reset</div>
+            <div id="search">Search</div>
+        </div>
+    </div>
+</div>
+
+<div id="grid" sort-params="">
+    <table>
+        <thead id="grid-header">
+            <tr>
+                <th data-name="id" data-sort="">Id</th>
+                <th data-name="name" data-sort="" class="sortable">Name</th>
+                <th data-name="abv" data-sort="" class="sortable">Abv</th>
+                <th data-name="ibu" data-sort="" class="sortable">Ibu</th>
+                <th data-name="glass">Glass</th>
+                <th data-name="available">Available</th>
+                <th data-name="isOrganic">Organic</th>
+                <th data-name="statusDisplay">Status</th>
+                <th data-name="createDate">Create Date</th>
+            </tr>
+        </thead>
+        <tbody id="grid-body"></tbody>
+    </table>
+    <div id="paging">
+        <input type="hidden" id="total-pages"/>
+        <input type="hidden" id="current-page" />
+        <span class="prev">&lt;</span>
+        <span class="current-page"></span>
+        <span class="next">&gt;</span>
+        <span class="total-pages"></span> pages
+    </div>
+</div>

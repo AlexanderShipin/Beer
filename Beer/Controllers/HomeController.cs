@@ -21,9 +21,14 @@ namespace Beer.Controllers
 
 		public ViewResult Index()
 		{
-			var model = _repository.Get();
+			return View("Index");
+		}
 
-			return View("Index", model);
+		public JsonResult Beers(string name, bool? isOrganic, int? page, string order, string sort)
+		{
+			var model = _repository.Get(name, isOrganic, page, order, sort);
+
+			return Json(model, JsonRequestBehavior.AllowGet);
 		}
 
 		protected override void OnException(ExceptionContext filterContext)

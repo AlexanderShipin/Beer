@@ -1,18 +1,77 @@
 ﻿body {
-    padding-top: 50px;
+    font-family: sans-serif;
+}
+
+#page {
+    padding-top: 30px;
     padding-bottom: 20px;
+    width: 1024px;
+    margin: 0 auto;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.title {
+    font-size: 20pt;
+    text-align: center;
+    padding: 10px 0;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+#search-panel {
+    border: 1px #000 solid;
+    padding: 10px;
 }
 
+.search-panel-line {
+    display: flex;
+    justify-content: space-between;
+    line-height: 40px;
+}
+
+.search-panel-column {
+    padding-right: 25px;
+}
+
+.bottons {
+    display: flex;
+}
+
+#search,
+#reset {
+    border: 1px #000 solid;
+    padding: 0 15px;
+    margin-left: 15px;
+}
+
+#grid {
+    margin: 25px 0;
+}
+
+table {
+    width: 100%;
+}
+
+#grid-header tr {
+    background-color: #c2cdfc;
+}
+
+table tr:nth-child(odd) {
+    background-color: #e5eafc;
+}
+
+table td {
+    padding: 12px;
+}
+
+#paging {
+    background-color: #c2cdfc;
+    padding: 0 12px;
+}
+
+.prev,
+.next {
+    padding: 0 7px;
+}
+
+.sortable {
+    text-decoration: underline;
+    cursor: pointer;
+}

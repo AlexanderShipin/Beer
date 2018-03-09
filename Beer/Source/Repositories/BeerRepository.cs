@@ -8,14 +8,10 @@ namespace Beer.Source.Repositories
 	{
 		private RequestHelper _requestHelper = new RequestHelper();
 
-		public BeerGridModel Filter(string exression)
+		public BeerGridModel Get(string name, bool? isOrganic, int? page, string order, string sort)
 		{
-			throw new System.NotImplementedException();
-		}
-
-		public BeerGridModel Get()
-		{
-			var json = _requestHelper.Request();
+			var requestParams = getParameterString(name, isOrganic, page, order, sort);
+			var json = _requestHelper.Request(requestParams);
 
 			if (string.IsNullOrEmpty(json))
 				return null;
@@ -25,9 +21,24 @@ namespace Beer.Source.Repositories
 			return beerGridModel;
 		}
 
-		public BeerGridModel Sort(string field, string order)
+		private string getParameterString(string name, bool? isOrganic, int? page, string order, string sort)
 		{
-			throw new System.NotImplementedException();
+			string result = string.Empty;
+			if (name != null)
+				result += $"&name={name}";
+			if (isOrganic != null && isOrganic.HasValue)
+			{
+				var isOrganicString = ((bool)isOrganic) ? "Y" : "N";
+				result += $"&isOrganic={isOrganicString}";
+			}
+			if (page != null && page.HasValue)
+				result += $"&p={page.Value}";
+			if (order != null)
+				result += $"&order={order}";
+			if (sort != null)
+				result += $"&sort={sort}";
+
+			return result;
 		}
 	}
 }
