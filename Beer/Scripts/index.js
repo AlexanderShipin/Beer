@@ -82,10 +82,10 @@ function getBeers(params) {
     const beersUrl = `${beersBaseUrl}?${params}`;
 
     $("#grid-body").empty();
-    $.getJSON(beersUrl).done(feelBeersGrid);
+    $.getJSON(beersUrl).done(fillBeersGrid);
 }
 
-function feelBeersGrid(beerGrid) {
+function fillBeersGrid(beerGrid) {
     $.each(beerGrid.Data, function (index, value) {
         $(formatBeerRow(value)).appendTo($("#grid-body"));
     });
